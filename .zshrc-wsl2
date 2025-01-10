@@ -6,12 +6,11 @@ SHELL=zsh
 ZSHEDIT=vim
 
 autoload -U compinit
-compinit -i
+compinit -u
 
 # Enable menu selection for autocomplete
 zstyle ':completion:*' menu select
 
-# Load complist for menu selection
 autoload -Uz zsh/complist
 zmodload zsh/complist
 
@@ -78,7 +77,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # CASE_SENSITIVE="true"
 
 # Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
+# Case-sensitive completion must be off. _ and - will be interchangeable.bindkey '\t' autosuggest-accept
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
@@ -129,15 +128,6 @@ DISABLE_AUTO_TITLE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(suse systemd dash 1password sudo ufw git docker-compose docker ssh node mvn sdk zsh-autosuggestions zsh-autocomplete gh zsh-syntax-highlighting gradle cp eza man ssh-agent spring vscode)
-
-bindkey -M menuselect 'a' backward-char    # Move left
-bindkey -M menuselect 'd' forward-char     # Move right
-bindkey -M menuselect 's' down-line-or-history  # Move down
-bindkey -M menuselect 'w' up-line-or-history    # Move up
-bindkey -M menuselect '^[' send-break  # Exit on Esc
-
-# Optional: Set Tab key to trigger menu selection
-bindkey '^I' complete-word
 
 # User configuration
 
@@ -212,28 +202,23 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 
 [ -f "/home/dev/.ghcup/env" ] && . "/home/dev/.ghcup/env" # ghcup-env
-source <(gh completion -s zsh)
-
 export PATH=~/.binenv:$PATH
+
 source <(binenv completion zsh)
+source <(gh completion -s zsh)
+source <(/home/dev/Projects/PHP/laravel-app/artisan completion zsh)
 
-# Enable menu selection for autocomplete
-zstyle ':completion:*' menu select
+ # bindkey '\t' autosuggest-accept
 
-# Load complist for menu selection
-autoload -Uz zsh/complist
-zmodload zsh/complist
+# Rebind Tab to trigger menu selection mode immediately
+bindkey '^I' menu-complete
 
-# Bind navigation keys for menu selection
-bindkey -M menuselect 'h' backward-char
-bindkey -M menuselect 'l' forward-char
-bindkey -M menuselect 'j' down-line-or-history
-bindkey -M menuselect 'k' up-line-or-history
+# Custom navigation keys for menu selection mode
+bindkey '^k' up-history
+bindkey '^j' down-history
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
+bindkey '^r' history-incremental-search-backward
 
-# Optional: Set Tab key to trigger menu selection
-bindkey '^I' complete-word
-bindkey '^ I'   complete-word       # tab          | complete
-bindkey '^ [[Z' autosuggest-accept  # shift + tab  | autosuggest
-bindkey '\t' autosuggest-accept
-
-
+bindkey '^f' expand-or-complete
+bindkey '^b' reverse-menu-complete
