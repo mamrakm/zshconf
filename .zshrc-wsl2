@@ -208,17 +208,8 @@ source <(binenv completion zsh)
 source <(gh completion -s zsh)
 source <(/home/dev/Projects/PHP/laravel-app/artisan completion zsh)
 
- # bindkey '\t' autosuggest-accept
+bindkey '\t' autosuggest-accept
 
-# Rebind Tab to trigger menu selection mode immediately
-bindkey '^I' menu-complete
+bindkey '^w' up-line-or-search
+bindkey '^s' down-line-or-select
 
-# Custom navigation keys for menu selection mode
-bindkey '^k' up-history
-bindkey '^j' down-history
-bindkey '^h' backward-delete-char
-bindkey '^w' backward-kill-word
-bindkey '^r' history-incremental-search-backward
-
-bindkey '^f' expand-or-complete
-bindkey '^b' reverse-menu-complete
