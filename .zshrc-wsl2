@@ -127,7 +127,7 @@ DISABLE_AUTO_TITLE="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(suse systemd dash 1password sudo ufw git docker-compose docker ssh node mvn sdk zsh-autosuggestions zsh-autocomplete gh zsh-syntax-highlighting gradle cp eza man ssh-agent spring vscode)
+plugins=(suse systemd dash 1password sudo ufw git docker-compose docker ssh node mvn sdk zsh-autosuggestions gh zsh-syntax-highlighting gradle cp eza man ssh-agent spring vscode)
 
 # User configuration
 
@@ -208,7 +208,8 @@ source <(binenv completion zsh)
 source <(gh completion -s zsh)
 source <(/home/dev/Projects/PHP/laravel-app/artisan completion zsh)
 
-bindkey '\t' autosuggest-accept
+# bindkey '\t' autosuggest-accept
+bindkey '^J' autosuggest-accept
 
 bindkey '^w' up-line-or-search
 bindkey '^s' down-line-or-select
