@@ -42,6 +42,7 @@ whereisl() {
   done
 }
 
+alias bat="bat --paging=never"
 alias fd="fd -E Library\
     -E Music\
     -E Applications\
@@ -196,10 +197,6 @@ if [ -e /home/dev/.nix-profile/etc/profile.d/nix.sh ]; then . /home/dev/.nix-pro
 # eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 # export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
 
 [ -f "/home/dev/.ghcup/env" ] && . "/home/dev/.ghcup/env" # ghcup-env
 export PATH=~/.binenv:$PATH
@@ -213,4 +210,9 @@ bindkey '^J' autosuggest-accept
 
 bindkey '^w' up-line-or-search
 bindkey '^s' down-line-or-select
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
 
